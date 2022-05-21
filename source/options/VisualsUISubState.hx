@@ -52,8 +52,8 @@ class VisualsUISubState extends BaseOptionsMenu
 			"What should the Time Bar display?",
 			'timeBarType',
 			'string',
-			'Time Left',
-			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
+			'Song Name',
+			['Song Name', 'Time Left', 'Time Elapsed', 'Disabled']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
@@ -93,7 +93,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'If unchecked, hides FPS Counter.',
 			'showFPS',
 			'bool',
-			#if android false #else true #end);
+			#if android true #else true #end);
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
 		
