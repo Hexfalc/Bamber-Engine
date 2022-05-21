@@ -905,7 +905,7 @@ class PlayState extends MusicBeatState
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
-		timeBar.createFilledBar(0xFF000000, 0x008000);
+		timeBar.createFilledBar(0x808080, 0x008000);
 		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
 		timeBar.visible = showTime;
@@ -1039,6 +1039,16 @@ class PlayState extends MusicBeatState
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
+		
+				// totally didnt took this from VDAB DE (sorry whatsdown and kade you guys will be credited)
+		var swagWatermark = new FlxText(4, scoreTxt.y + 15, 0,
+		SONG.song
+		+ " "
+		+ "- Bamber Engine 1.0", 16);
+		//+ " ", 16);
+		swagWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		swagWatermark.scrollFactor.set();
+		add(swagWatermark);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "Imagine Cheating", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.GREEN, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1061,7 +1071,8 @@ class PlayState extends MusicBeatState
 		botplayTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
-		timeTxt.cameras = [camHUD];
+		timeTxt.cameras = [camHUD]
+		swagWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		#if android
