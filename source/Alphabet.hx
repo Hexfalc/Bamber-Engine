@@ -349,12 +349,14 @@ class Alphabet extends FlxSpriteGroup
 		{
 			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
 			{
-				case "Classic":
+				case "Classic": {
 					x = FlxMath.lerp(x, (targetY * 20) + groupX, 0.16 / (openfl.Lib.application.window.frameRate / 60));
 					y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * groupY), 0.16 / (openfl.Lib.application.window.frameRate / 60));
-				case "Vertical":
+				}
+				case "Vertical": {
 					y = FlxMath.lerp(y, (scaledY * 120) + (FlxG.height * 0.5), 0.16 / (openfl.Lib.application.window.frameRate / 60));
-				case "C-Shape":
+				}
+				case "C-Shape": {
 					y = FlxMath.lerp(y, (scaledY * 65) + (FlxG.height * 0.39), 0.16 / (openfl.Lib.application.window.frameRate / 60));
 
 					x = FlxMath.lerp(x, Math.exp(scaledY * 0.8) * 70 + (FlxG.width * 0.1), 0.16 / (openfl.Lib.application.window.frameRate / 60));
@@ -363,14 +365,15 @@ class Alphabet extends FlxSpriteGroup
 
 					if (x > FlxG.width + 30)
 						x = FlxG.width + 30;
-
-				case "D-Shape":
+				}
+				case "D-Shape": {
 					y = FlxMath.lerp(y, (scaledY * 90) + (FlxG.height * 0.45), 0.16 / (openfl.Lib.application.window.frameRate / 60));
 
 					x = FlxMath.lerp(x, Math.exp(Math.abs(scaledY * 0.8)) * -70 + (FlxG.width * 0.35), 0.16 / (openfl.Lib.application.window.frameRate / 60));
 
 					if (x < -900)
 						x = -900;
+				}
 			}
 		}
 
