@@ -348,7 +348,6 @@ class Alphabet extends FlxSpriteGroup
 		if (isMenuItem)
 		{
 			var scaledY = FlxMath.remapToRange(targetY, 0, 1, 0, 1.3);
-			switch (itemType) 
 			{
 				case "Classic":
 					x = FlxMath.lerp(x, (targetY * 20) + groupX, 0.16 / (openfl.Lib.application.window.frameRate / 60));
