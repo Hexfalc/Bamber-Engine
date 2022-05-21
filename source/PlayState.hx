@@ -877,7 +877,7 @@ class PlayState extends MusicBeatState
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -1034,7 +1034,7 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("comic.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
@@ -1044,14 +1044,14 @@ class PlayState extends MusicBeatState
 		var swagWatermark = new FlxText(4, scoreTxt.y + 15, 0,
 		SONG.song
 		+ " "
-		+ "- Bamber Engine 1.0", 16);
+		+ "| Bamber Engine 1.0", 16);
 		//+ " ", 16);
-		swagWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		swagWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		swagWatermark.scrollFactor.set();
 		add(swagWatermark);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "Imagine Cheating", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.GREEN, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(Paths.font("comic.ttf"), 32, FlxColor.GREEN, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -2326,9 +2326,9 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:' + ratingName;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + ratingFC+ ') ';
+			scoreTxt.text = 'Score:' + songScore + ' | Misses:' + songMisses + ' | Accuracy:' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% (' + ratingFC + ') ';
 			//peeps wanted no integer rating
 		}
 
