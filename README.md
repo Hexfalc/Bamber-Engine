@@ -1,5 +1,5 @@
 # FNF BAMBER ENGINE
-Just a psych engine edit for dave and bambi mods
+Just a psych engine dave and bambi edit
 ## Credits
 The Psych Engine Team - Psych Engine
 
