@@ -1066,14 +1066,14 @@ class PlayState extends MusicBeatState
 		SONG.song
 		+ " - "
 		+ (storyDifficulty == 2 ? "HARD" : storyDifficulty == 1 ? "NORMAL" : "EASY")
-		+ "| Bamber Engine 1.0", 16);
+		+ " | Bamber Engine 1.0", 16);
 		//+ " ", 16);
 		swagWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		swagWatermark.scrollFactor.set();
 		add(swagWatermark);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "Imagine Cheating", 32);
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.GREEN, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
