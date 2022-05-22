@@ -11,4 +11,4 @@ EIT - The Character Select Code
 
 Dave And Bambi Team - Bambi And Tristan Assets
 
-Nuaxz - The Wavy Background Tutorial For Adding Them
+Nuaxz - The Wavy Backgrounds Tutorial For Adding Them
