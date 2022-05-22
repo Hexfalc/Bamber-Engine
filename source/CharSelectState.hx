@@ -11,10 +11,11 @@ import flixel.effects.FlxFlicker;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 class CharSelectState extends MusicBeatState{
-    var charsArray:Array<String> = ['BOYFRIEND', 'BF-CAR'];
+    var charsArray:Array<String> = ['BOYFRIEND', 'BAMBI', 'TRISTAN'];
     var leBG:FlxSprite;
     var bf:FlxSprite;
-    var bfcar:FlxSprite;
+    var bambi:FlxSprite;
+    var tristan:FlxSprite;
     var selectedText:FlxText;
     var charSelect:FlxSprite;
     public static var curSelected:Int = 0;
@@ -30,13 +31,21 @@ class CharSelectState extends MusicBeatState{
         bf.animation.addByPrefix('hey', 'BF HEY!!', 24, true);
         bf.animation.play('idle');
         add(bf);
-        bfcar = new FlxSprite(450, 300).loadGraphic(Paths.image('characters/bfCar'));
-        bfcar.frames = Paths.getSparrowAtlas('characters/bfCar');
-        bfcar.animation.addByPrefix('idle', 'BF idle dance', 24, true);
-        bfcar.animation.addByPrefix('hey', 'BF HEY!!', 24, true);
-        bfcar.animation.addByPrefix('singUP', 'BF NOTE UP', 24, true);
-        bfcar.animation.play('idle');
-        add(bfcar);   
+        bambi = new FlxSprite(450, 300).loadGraphic(Paths.image('characters/bambi'));
+        bambi.frames = Paths.getSparrowAtlas('characters/bambi');
+        bambi.animation.addByPrefix('idle', 'BF idle dance', 24, true);
+        bambi.animation.addByPrefix('hey', 'BF HEY!!', 24, true);
+        bambi.animation.addByPrefix('singUP', 'BF NOTE UP', 24, true);
+        bambi.animation.play('idle');
+        add(bambi);
+        tristan = new FlxSprite(450, 300).loadGraphic(Paths.image('characters/TRISTAN'));
+
+        tristan.frames = Paths.getSparrowAtlas('characters/TRISTAN');
+
+        tristan.animation.addByPrefix('idle', 'BF idle dance', 24, true);
+        tristan.animation.addByPrefix('hey', 'BF HEY!!', 24, true);
+        tristan.animation.play('idle');
+        add(tristan);
 		selectedText = new FlxText(0, 10, charsArray[0], 24);
 		selectedText.alpha = 0.5;
 		selectedText.x = (FlxG.width) - (selectedText.width) - 25;
@@ -45,6 +54,11 @@ class CharSelectState extends MusicBeatState{
         charSelect.offset.x -= 150;
         add(charSelect);
         changeSelection();
+        
+    #if android
+		addVirtualPad(LEFT_RIGHT, A_B);
+		#end
+        
         super.create();
     }
 
@@ -61,14 +75,23 @@ class CharSelectState extends MusicBeatState{
         switch(curSelected){
         case 0:
         bf.visible = true;
-        bfcar.visible = false;
+        bambi.visible = false;
+        tristan.visible = false;
         FlxTween.color(leBG, 2, leBG.color, FlxColor.BLUE, {onComplete:function(twn:FlxTween){
         FlxTween.cancelTweensOf(leBG);
         }});
         case 1:
         bf.visible = false;
-        bfcar.visible = true;
-        FlxTween.color(leBG, 2, leBG.color, FlxColor.RED, {onComplete:function(twn:FlxTween){
+        bambi.visible = true;
+        tristan.visible = false;
+        FlxTween.color(leBG, 2, leBG.color, FlxColor.GREEN, {onComplete:function(twn:FlxTween){
+        FlxTween.cancelTweensOf(leBG);
+        }});
+        case 2:
+        bf.visible = false;
+        bambi.visible = false;
+        tristan.visible = true;
+        FlxTween.color(leBG, 2, leBG.color, FlxColor.YELLOW, {onComplete:function(twn:FlxTween){
         FlxTween.cancelTweensOf(leBG);
         }});
         }
@@ -86,9 +109,12 @@ class CharSelectState extends MusicBeatState{
         if (controls.ACCEPT){
         FlxG.sound.play(Paths.sound('confirmMenu'));
         switch(curSelected){
+        case 2;
+        FlxFlicker.flicker(tristan, 1.5, 0.15, false);
+        tristan.animation.play('hey');
         case 1:
-        FlxFlicker.flicker(bfcar, 1.5, 0.15, false);
-        bfcar.animation.play('singUP');
+        FlxFlicker.flicker(bambi, 1.5, 0.15, false);
+        bambi.animation.play('hey');
         case 0:
         FlxFlicker.flicker(bf, 1.5, 0.15, false);
         bf.animation.play('hey');
