@@ -1741,7 +1741,6 @@ class FunkinLua {
 		});
 		
 		call('onCreate', []);
-		#end
 	}
 
 	inline static function getTextObject(name:String):FlxText
