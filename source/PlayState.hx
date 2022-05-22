@@ -1052,10 +1052,9 @@ class PlayState extends MusicBeatState
 		add(scoreTxt);
 		
 				// totally didnt took this from VDAB DE (sorry whatsdown and kade you guys will be credited)
-				// totally didnt took this from VDAB DE (sorry whatsdown and kade you guys will be credited)
 		var swagWatermark = new FlxText(4, scoreTxt.y + 15, 0,
 		SONG.song
-		+ "-"
+		+ " - "
 		+ (storyDifficulty == 2 ? "HARD" : storyDifficulty == 1 ? "NORMAL" : "EASY")
 		+ "| Bamber Engine 1.0", 16);
 		//+ " ", 16);
