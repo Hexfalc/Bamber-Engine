@@ -109,7 +109,7 @@ class CharSelectState extends MusicBeatState{
         if (controls.ACCEPT){
         FlxG.sound.play(Paths.sound('confirmMenu'));
         switch(curSelected){
-        case 2;
+        case 2:
         FlxFlicker.flicker(tristan, 1.5, 0.15, false);
         tristan.animation.play('hey');
         case 1:
