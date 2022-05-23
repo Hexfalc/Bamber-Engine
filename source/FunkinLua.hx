@@ -36,6 +36,7 @@ import sys.io.File;
 import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
+import Shaders;
 
 #if desktop
 import Discord;
@@ -262,6 +263,10 @@ class FunkinLua {
 			}
 			luaTrace("Script doesn't exist!");
 		});
+	 
+	 Lua_helper.add_callback(lua, "addGlitchEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
+			
+			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed,waveFrq,waveAmp));
 		
 		Lua_helper.add_callback(lua, "loadSong", function(?name:String = null, ?difficultyNum:Int = -1) {
 			if(name == null || name.length < 1)
@@ -336,19 +341,17 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "setPropertyFromGroup", function(obj:String, index:Int, variable:Dynamic, value:Dynamic) {
 			if(Std.isOfType(Reflect.getProperty(getInstance(), obj), FlxTypedGroup)) {
 				setGroupStuff(Reflect.getProperty(getInstance(), obj).members[index], variable, value);
-				return true;
+				return;
 			}
 
 			var leArray:Dynamic = Reflect.getProperty(getInstance(), obj)[index];
 			if(leArray != null) {
 				if(Type.typeof(variable) == ValueType.TInt) {
 					leArray[variable] = value;
-					return true;
+					return;
 				}
 				setGroupStuff(leArray, variable, value);
-				return true;
 			}
-			return false;
 		});
 		Lua_helper.add_callback(lua, "removeFromGroup", function(obj:String, index:Int, dontDestroy:Bool = false) {
 			if(Std.isOfType(Reflect.getProperty(getInstance(), obj), FlxTypedGroup)) {
@@ -869,7 +872,6 @@ class FunkinLua {
 				isDad = true;
 			}
 			PlayState.instance.moveCamera(isDad);
-			return isDad;
 		});
 		Lua_helper.add_callback(lua, "cameraShake", function(camera:String, intensity:Float, duration:Float) {
 			cameraFromString(camera).shake(intensity, duration);
@@ -1739,84 +1741,10 @@ class FunkinLua {
 			luaTrace('musicFadeOut is deprecated! Use soundFadeOut instead.', false, true);
 		});
 		
-		//SHADER SHIT
-		
-		Lua_helper.add_callback(lua, "addChromaticAbberationEffect", function(camera:String,chromeOffset:Float = 0.005) {
-			
-			PlayState.instance.addShaderToCamera(camera, new ChromaticAberrationEffect(chromeOffset));
-			
-		});
-		
-		Lua_helper.add_callback(lua, "addScanlineEffect", function(camera:String,lockAlpha:Bool=false) {
-			
-			PlayState.instance.addShaderToCamera(camera, new ScanlineEffect(lockAlpha));
-			
-		});
-		Lua_helper.add_callback(lua, "addGrainEffect", function(camera:String,grainSize:Float,lumAmount:Float,lockAlpha:Bool=false) {
-			
-			PlayState.instance.addShaderToCamera(camera, new GrainEffect(grainSize,lumAmount,lockAlpha));
-			
-		});
-		Lua_helper.add_callback(lua, "addTiltshiftEffect", function(camera:String,blurAmount:Float,center:Float) {
-			
-			PlayState.instance.addShaderToCamera(camera, new TiltshiftEffect(blurAmount,center));
-			
-		});
-		Lua_helper.add_callback(lua, "addVCREffect", function(camera:String,glitchFactor:Float = 0.0,distortion:Bool=true,perspectiveOn:Bool=true,vignetteMoving:Bool=true) {
-			
-			PlayState.instance.addShaderToCamera(camera, new VCRDistortionEffect(glitchFactor,distortion,perspectiveOn,vignetteMoving));
-			
-		});
-		Lua_helper.add_callback(lua, "addGlitchEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
-			
-			PlayState.instance.addShaderToCamera(camera, new GlitchEffect(waveSpeed,waveFrq,waveAmp));
-			
-		});
-		Lua_helper.add_callback(lua, "addPulseEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
-			
-			PlayState.instance.addShaderToCamera(camera, new PulseEffect(waveSpeed,waveFrq,waveAmp));
-			
-		});
-		Lua_helper.add_callback(lua, "addDistortionEffect", function(camera:String,waveSpeed:Float = 0.1,waveFrq:Float = 0.1,waveAmp:Float = 0.1) {
-			
-			PlayState.instance.addShaderToCamera(camera, new DistortBGEffect(waveSpeed,waveFrq,waveAmp));
-			
-		});
-		Lua_helper.add_callback(lua, "addInvertEffect", function(camera:String,lockAlpha:Bool=false) {
-			
-			PlayState.instance.addShaderToCamera(camera, new InvertColorsEffect(lockAlpha));
-			
-		});
-		Lua_helper.add_callback(lua, "addGreyscaleEffect", function(camera:String) { //for dem funkies
-			
-			PlayState.instance.addShaderToCamera(camera, new GreyscaleEffect());
-			
-		});
-		Lua_helper.add_callback(lua, "addGrayscaleEffect", function(camera:String) { //for dem funkies
-			
-			PlayState.instance.addShaderToCamera(camera, new GreyscaleEffect());
-			
-		});
-		Lua_helper.add_callback(lua, "add3DEffect", function(camera:String,xrotation:Float=0,yrotation:Float=0,zrotation:Float=0,depth:Float=0) { //for dem funkies
-			
-			PlayState.instance.addShaderToCamera(camera, new ThreeDEffect(xrotation,yrotation,zrotation,depth));
-			
-		});
-		Lua_helper.add_callback(lua, "addBloomEffect", function(camera:String,intensity:Float = 0.35,blurSize:Float=1.0) {
-			
-			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0,intensity));
-			
-		});
-		Lua_helper.add_callback(lua, "clearEffects", function(camera:String) {
-			PlayState.instance.clearShaderFromCamera(camera);
-		});
-		Discord.DiscordClient.addLuaCallbacks(lua);
-		
 		call('onCreate', []);
-		#end
 	}
 
-	inline static function getTextObject(name:String):FlxText
+inline static function getTextObject(name:String):FlxText
 	{
 		return PlayState.instance.modchartTexts.exists(name) ? PlayState.instance.modchartTexts.get(name) : Reflect.getProperty(PlayState.instance, name);
 	}
@@ -2042,16 +1970,16 @@ class FunkinLua {
 		return Function_Continue;
 	}
 
-	public static function getPropertyLoopThingWhatever(killMe:Array<String>, ?checkForTextsToo:Bool = true, ?noGameOver:Bool = false):Dynamic
+	function getPropertyLoopThingWhatever(killMe:Array<String>, ?checkForTextsToo:Bool = true):Dynamic
 	{
-		var coverMeInPiss:Dynamic = getObjectDirectly(killMe[0], checkForTextsToo, noGameOver);
+		var coverMeInPiss:Dynamic = getObjectDirectly(killMe[0], checkForTextsToo);
 		for (i in 1...killMe.length-1) {
 			coverMeInPiss = Reflect.getProperty(coverMeInPiss, killMe[i]);
 		}
 		return coverMeInPiss;
 	}
 
-	public static function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true, ?noGameOver:Bool = false):Dynamic
+	function getObjectDirectly(objectName:String, ?checkForTextsToo:Bool = true):Dynamic
 	{
 		var coverMeInPiss:Dynamic = null;
 		if(PlayState.instance.modchartSprites.exists(objectName)) {
@@ -2059,7 +1987,7 @@ class FunkinLua {
 		} else if(checkForTextsToo && PlayState.instance.modchartTexts.exists(objectName)) {
 			coverMeInPiss = PlayState.instance.modchartTexts.get(objectName);
 		} else {
-			coverMeInPiss = Reflect.getProperty(noGameOver ? PlayState.instance : getInstance(), objectName);
+			coverMeInPiss = Reflect.getProperty(getInstance(), objectName);
 		}
 		return coverMeInPiss;
 	}
@@ -2117,7 +2045,7 @@ class FunkinLua {
 		#end
 	}
 
-	public static inline function getInstance()
+	inline function getInstance()
 	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
