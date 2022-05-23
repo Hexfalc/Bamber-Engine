@@ -2759,6 +2759,7 @@ class PlayState extends MusicBeatState
 		callOnLuas('onUpdatePost', [elapsed]);
 		for (i in shaderUpdates){
 			i(elapsed);
+		}
 	}
 
 	function openChartEditor()
