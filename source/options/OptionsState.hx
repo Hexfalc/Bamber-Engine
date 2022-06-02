@@ -80,7 +80,7 @@ class OptionsState extends MusicBeatState
 
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bg);
+		//add(bg);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -114,6 +114,87 @@ class OptionsState extends MusicBeatState
 		#end
 
 		super.create();
+		
+		switch (FlxG.random.int(1, 7))
+            {
+      case 1:
+			
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/biorange'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+		
+      case 2:
+      
+    var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/cudroid'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+              
+			case 3:
+			
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/dreambeam'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFFF00;
+		add(bg);
+			
+			case 4:
+			
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/roflcopter'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+		
+			case 5:
+			
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/seth'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+
+			case 6:
+		
+	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/vio'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+		
+		case 7:
+		
+	var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/zevisly'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.updateHitbox();
+		bg.screenCenter();
+		bg.antialiasing = ClientPrefs.globalAntialiasing;
+		bg.color = 0xFFea71fd;
+		add(bg);
+			
+		}
 	}
 
 	override function closeSubState() {
